@@ -100,11 +100,14 @@ if (!this.CharsetEncoder) throw 'CharsetEncoder has not been loaded.';
         ap.archive = url; ap.code = className;
         ap.style.cssText = 'width: 0; height: 0; position: absolute; visibility: hidden;';
         (document.body || document.documentElement).appendChild(ap);
-        if (ap.b) { // synch load.
-            CharsetEncoder.getFactory('JavaApplet').applet = ap;
-        }
-        else {
-            ap.parentNode.removeChild(ap);
-        }
+        // set timeout for Google Chrome.
+        setTimeout(function() {
+            if (ap.b) {
+                CharsetEncoder.getFactory('JavaApplet').applet = ap;
+            }
+            else {
+                ap.parentNode.removeChild(ap);
+            }
+        }, 0);
     })();
 })()
