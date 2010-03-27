@@ -51,15 +51,14 @@ if (!this.CharsetEncoder) throw 'CharsetEncoder has not been loaded.';
             throw e;
         }
         if (!buffer) {
-            return result;
+            return result; // returns ByteArray directly.
         }
-        else {
-            var b_len = buffer.length;
-            for (var i = 0, len = result.length; i < len; i++) {
-                buffer[b_len++] = result[i];
-            }
-            return buffer;
+        var buf = buffer || [], b_len = buf.length || 0;
+        for (var i = 0, len = result.length; i < len; i++) {
+            buf[b_len++] = result[i];
         }
+        if (buf.length != b_len) buf.length = b_len;
+        return buffer;
     }
     function decode(bytes, charset, workfile) {
         if (bytes instanceof ByteArray) {

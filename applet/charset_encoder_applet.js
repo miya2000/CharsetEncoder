@@ -43,13 +43,13 @@ if (!this.CharsetEncoder) throw 'CharsetEncoder has not been loaded.';
         // encode
         var result = this.applet.b(str, this.charset);
         // convert Java byte array to JavaScript Array.
-        if (!buffer) buffer = [];
-        var b_len = buffer.length;
+        var buf = buffer || [], b_len = buf.length || 0;
         for (var i = 0, len = result.length; i < len; i++) {
-            buffer[b_len++] = result[i] & 0xFF;
+            buf[b_len++] = result[i] & 0xFF;
         }
+        if (buf.length != b_len) buf.length = b_len;
         result = null; // fear for memory leak.
-        return buffer;
+        return buf;
     };
     JavaAppletCharsetEncoder.prototype.decode = function(bytes) {
         var result = this.applet.s(bytes, this.charset); // It will be error at Opera 10.10 lower.

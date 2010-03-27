@@ -82,7 +82,7 @@ CharsetEncoder.prototype = {
      * 
      * @param {String}  name      - factory's name.
      * @param {CharsetEncoderFactory} factory - factory of CharsetEncoder.
-     * @param {String}  order     - search order to find by charset. lower is prior. default value is 100.
+     * @param {Number}  order     - search order to find by charset. lower is prior. default value is 100.
      * @param {Boolean} asDefault - mark factory as default. Optional.
      */
     CharsetEncoder.registerFactory = function registerFactory(name, factory, order, asDefault) {
@@ -162,12 +162,13 @@ CharsetEncoder.prototype = {
     function UTF16LEEncoder() {
     }
     UTF16LEEncoder.prototype.encode = function encode(str, buffer) {
-        var buf = buffer || [], b_len = buf.length;
+        var buf = buffer || [], b_len = buf.length || 0;
         for (var i = 0, len = str.length; i < len; i++) {
             var code = str.charCodeAt(i);
             buf[b_len++] = code & 0xFF;
             buf[b_len++] = code >>> 8 & 0xFF;
         }
+        if (buf.length != b_len) buf.length = b_len;
         return buf;
     };
     UTF16LEEncoder.prototype.decode = function decode(bytes) {
@@ -201,7 +202,7 @@ CharsetEncoder.prototype = {
     function UTF8Encoder() {
     }
     UTF8Encoder.prototype.encode = function encode(str, buffer) {
-        var buf = buffer || [], b_len = buf.length;
+        var buf = buffer || [], b_len = buf.length || 0;
         for (var i = 0, len = str.length; i < len; i++) {
             var code = str.charCodeAt(i);
             // frequency order.
@@ -218,6 +219,7 @@ CharsetEncoder.prototype = {
                 buf[b_len++] = 0x80 | (code & 0x3F);
             }
         }
+        if (buf.length != b_len) buf.length = b_len;
         return buf;
     };
     UTF8Encoder.prototype.decode = (function() {
