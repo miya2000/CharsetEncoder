@@ -69,10 +69,10 @@ if (!this.CharsetEncoder) throw 'CharsetEncoder has not been loaded.';
     CharsetEncoder.registerFactory(
         'JavaApplet',
         {
-            get applet : function() {
+            get applet() {
                 return applet;
             },
-            set applet : function(value) {
+            set applet(value) {
                 if (applet && applet.parentNode) { applet.parentNode.removeChild(applet); }
                 applet = value;
                 deleteCache();

@@ -127,10 +127,10 @@ if (!this.CharsetEncoder) throw 'CharsetEncoder has not been loaded.';
     CharsetEncoder.registerFactory(
         'FileIO',
         {
-            get workfile : function() {
+            get workfile() {
                 return workfile;
             },
-            set workfile : function(value) {
+            set workfile(value) {
                 workfile = value;
                 deleteCache();
             },
