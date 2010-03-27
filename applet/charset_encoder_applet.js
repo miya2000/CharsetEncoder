@@ -41,7 +41,7 @@ if (!this.CharsetEncoder) throw 'CharsetEncoder has not been loaded.';
     }
     JavaAppletCharsetEncoder.prototype.encode = function(str, buffer) {
         // encode
-        var result = this.applet.b(this.charset);
+        var result = this.applet.b(str, this.charset);
         // convert Java byte array to JavaScript Array.
         if (!buffer) buffer = [];
         var b_len = buffer.length;
