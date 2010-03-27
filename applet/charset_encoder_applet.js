@@ -93,11 +93,11 @@ if (!this.CharsetEncoder) throw 'CharsetEncoder has not been loaded.';
     
     // set default applet.
     (function() {
-        var jarName = 'A.jar';
+        var jarName = 'a.jar'; var className = 'A';
         var currentScript = (function f(e) { if (e.nodeName.toLowerCase() == 'script') return e; return f(e.lastChild) })(document); // get last appended script element.
         var url = currentScript.src.replace(/[^/]*$/, '') + jarName;
         var ap = document.createElement('applet');
-        ap.archive = url; ap.code = 'A';
+        ap.archive = url; ap.code = className;
         ap.style.cssText = 'width: 0; height: 0; position: absolute; visibility: hidden;';
         (document.body || document.documentElement).appendChild(ap);
         if (ap.b) { // synch load.
