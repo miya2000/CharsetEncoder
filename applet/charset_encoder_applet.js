@@ -31,8 +31,8 @@ if (!this.CharsetEncoder) throw 'CharsetEncoder has not been loaded.';
     
     // This implementation works web only.
     if (typeof(window) == 'undefined' || typeof(document) == 'undefined') return;
-    // If this environment supports the Live Connect, use Live Connect version. (charset_encoder_liveconnect.js)
-    if (this.java && java.lang && typeof(java.lang.String) == 'function') return;
+    // If this environment supports the Live Connect, use Live Connect version.
+    if (CharsetEncoder.getFactory('LiveConnect') != null) return;
     
     /** class JavaAppletCharsetEncoder */
     function JavaAppletCharsetEncoder(applet, charset) {

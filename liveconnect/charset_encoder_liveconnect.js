@@ -30,7 +30,7 @@ if (!this.CharsetEncoder) throw 'CharsetEncoder has not been loaded.';
 (function() {
     
     // This implementation depends on Java Live Connect.
-    if (this.java && java.lang && typeof(java.lang.String) == 'function'); else return;
+    if (this.java && java.lang && typeof(java.lang.String) !== 'undefined'); else return;
     
     /** class LiveConnectCharsetEncoder */
     function LiveConnectCharsetEncoder(charset) {
